@@ -3,7 +3,7 @@ import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 
 @Injectable()
-export class UsersService {
+export class ActivitiesService {
   create(createActivityDto: CreateActivityDto) {
     return 'This action adds a new activity';
   }
