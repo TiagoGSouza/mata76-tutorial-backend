@@ -27,8 +27,8 @@ export class ActivitiesController {
     return this.activitiesService.update(+id, updateActivityDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete('delete/'+':id')
+  remove(@Param('id') id: number) {
     return this.activitiesService.remove(+id);
   }
 }
