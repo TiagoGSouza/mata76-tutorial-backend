@@ -16,8 +16,15 @@ export class ActivitiesService {
     // return 'This action adds a new activity';
   }
 
-  findAll() {
-    return `This action returns all activities`;
+  findAll(){
+    const activities = this.activityRepository.findAll();
+    return activities;
+  }
+
+  findByDate(@Body() body: any) {
+    const date = body.date;
+    const activities = this.activityRepository.findByDate(date);
+    return activities;
   }
 
   findOne(id: number) {
