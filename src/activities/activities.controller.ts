@@ -13,8 +13,13 @@ export class ActivitiesController {
   }
 
   @Get()
-  findAll() {
+  findAll(){
     return this.activitiesService.findAll();
+  }
+
+  @Get('filter')
+  findByDate(@Body() body: any) {
+    return this.activitiesService.findByDate(body);
   }
 
   @Get(':id')

@@ -3,6 +3,6 @@ export class Activity {
     user: string;
     date: string;
     startTime: number;
-    endTime: number;
+    endTIme: number;
     status: string;
 }
