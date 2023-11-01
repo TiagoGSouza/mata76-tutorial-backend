@@ -35,6 +35,14 @@ export class PrismaActivityRepository implements ActivityRepository {
         });
     }
 
+    async remove(id: number): Promise<void> {
+        await this.prisma.activity.delete({
+            where: {
+                id: id
+            }
+        });
+    }
+
     async update(id: number, date: string, startTime: number, endTime: number): Promise<void> {
         await this.prisma.activity.update({
             where: {
