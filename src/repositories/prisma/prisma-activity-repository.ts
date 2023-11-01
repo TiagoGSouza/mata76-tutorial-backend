@@ -6,7 +6,7 @@ import { Activity } from "src/activities/entities/activity.entity";
 @Injectable()
 export class PrismaActivityRepository implements ActivityRepository {
     constructor(private prisma: PrismaService) {}
-
+    
     async findAll(): Promise<Activity[]> {
         const activities = await this.prisma.activity.findMany();
         return activities;
@@ -43,4 +43,16 @@ export class PrismaActivityRepository implements ActivityRepository {
         });
     }
 
+    async update(id: number, date: string, startTime: number, endTime: number): Promise<void> {
+        await this.prisma.activity.update({
+            where: {
+                id: id,
+            },
+            data: {
+                date: date,
+                startTime: startTime,
+                endTIme: endTime
+            }
+        });
+    }
 }

@@ -31,7 +31,9 @@ export class ActivitiesService {
     return `This action returns a #${id} activity`;
   }
 
-  update(id: number, updateActivityDto: UpdateActivityDto) {
+  async update(id: number, updateActivityDto: UpdateActivityDto) {
+    const {date, startTime, endTime} = updateActivityDto;
+    await this.activityRepository.update(id, date, startTime, endTime);
     return `This action updates a #${id} activity`;
   }
 

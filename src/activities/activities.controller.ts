@@ -27,8 +27,8 @@ export class ActivitiesController {
     return this.activitiesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActivityDto: UpdateActivityDto) {
+  @Patch('update/'+':id')
+  update(@Param('id') id: number, @Body() updateActivityDto: UpdateActivityDto) {
     return this.activitiesService.update(+id, updateActivityDto);
   }
 
