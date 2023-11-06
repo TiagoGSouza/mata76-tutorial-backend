@@ -7,6 +7,15 @@ import { Activity } from "src/activities/entities/activity.entity";
 export class PrismaActivityRepository implements ActivityRepository {
     constructor(private prisma: PrismaService) {}
     
+    async findOne(id: number): Promise<Activity> {
+        const activity = await this.prisma.activity.findUnique({
+            where: {
+                id: id
+            },
+        });
+        return activity;
+    }
+    
     async findAll(): Promise<Activity[]> {
         const activities = await this.prisma.activity.findMany();
         return activities;
@@ -24,6 +33,15 @@ export class PrismaActivityRepository implements ActivityRepository {
     }
 
     async create(user: string, date: string, startTime: number, endTIme: number, status: string): Promise<void> {
+        if(startTime == 0){
+            status = "Não iniciada";
+        }
+        else if (endTIme == 0){
+            status = "Iniciada";
+        }
+        else {
+            status = "Finalizada";
+        }
         await this.prisma.activity.create({
             data:{
                 user,
@@ -43,16 +61,27 @@ export class PrismaActivityRepository implements ActivityRepository {
         });
     }
 
-    async update(id: number, date: string, startTime: number, endTime: number): Promise<void> {
+    async update(id: number, user: string, date: string, startTime: number, endTIme: number, status: string): Promise<void> {
+        if(startTime == 0){
+            status = "Não iniciada";
+        }
+        else if (endTIme == 0){
+            status = "Iniciada";
+        }
+        else {
+            status = "Finalizada";
+        }
         await this.prisma.activity.update({
             where: {
                 id: id,
             },
-            data: {
-                date: date,
-                startTime: startTime,
-                endTIme: endTime
-            }
+            data:{
+                user,
+                date,
+                startTime,
+                endTIme,
+                status
+            },
         });
     }
 }

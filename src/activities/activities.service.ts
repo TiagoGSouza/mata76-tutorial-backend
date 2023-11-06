@@ -11,34 +11,35 @@ export class ActivitiesService {
 
   async create(@Body() createActivityDto: CreateActivityDto) {
     const {user, date, startTime, endTime, status} = createActivityDto
-    await this.activityRepository.create(user, date, startTime, endTime, status);
-    // await this.activityRepository.create("teste", "23/09/2023", 1756, 1956, "Não iniciado");
-    // return 'This action adds a new activity';
+    var stTime: number = +startTime
+    var edTime: number = +endTime
+    await this.activityRepository.create(user, date, stTime, edTime, status);
   }
 
-  findAll(){
+  async findOne(id: number){
+    const activity = this.activityRepository.findOne(id);
+    return activity;
+  }
+
+  async findAll(){
     const activities = this.activityRepository.findAll();
     return activities;
   }
 
-  findByDate(@Body() body: any) {
+  async findByDate(@Body() body: any) {
     const date = body.date;
     const activities = this.activityRepository.findByDate(date);
     return activities;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} activity`;
-  }
-
-  async update(id: number, updateActivityDto: UpdateActivityDto) {
-    const {date, startTime, endTime} = updateActivityDto;
-    await this.activityRepository.update(id, date, startTime, endTime);
-    return `This action updates a #${id} activity`;
+  async update(id: number, createActivityDto: UpdateActivityDto) {
+    const {user, date, startTime, endTime, status} = createActivityDto
+    var stTime: number = +startTime
+    var edTime: number = +endTime
+    await this.activityRepository.update(id, user, date, stTime, edTime, status);
   }
 
   async remove(id: number) {
     await this.activityRepository.remove(id);
-    return `This action removes a #${id} activity`;
   }
 }
