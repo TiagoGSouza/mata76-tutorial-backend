@@ -14,7 +14,7 @@ model Activity {
   id        Int @default(autoincrement()) @id
   user      String
   date      String
-  startTime Int
-  endTIme   Int
+  startTime String
+  endTime   String
   status    String
 }

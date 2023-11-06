@@ -1,6 +1,5 @@
 import { Body, Injectable } from '@nestjs/common';
 import { CreateActivityDto } from './dto/create-activity.dto';
-import { UpdateActivityDto } from './dto/update-activity.dto';
 import { ActivityRepository } from 'src/repositories/activity-repository';
 
 @Injectable()
@@ -11,9 +10,7 @@ export class ActivitiesService {
 
   async create(@Body() createActivityDto: CreateActivityDto) {
     const {user, date, startTime, endTime, status} = createActivityDto
-    var stTime: number = +startTime
-    var edTime: number = +endTime
-    await this.activityRepository.create(user, date, stTime, edTime, status);
+    await this.activityRepository.create(user, date, startTime, endTime, status);
   }
 
   async findOne(id: number){
@@ -32,11 +29,9 @@ export class ActivitiesService {
     return activities;
   }
 
-  async update(id: number, createActivityDto: UpdateActivityDto) {
+  async update(id: number, createActivityDto: CreateActivityDto) {
     const {user, date, startTime, endTime, status} = createActivityDto
-    var stTime: number = +startTime
-    var edTime: number = +endTime
-    await this.activityRepository.update(id, user, date, stTime, edTime, status);
+    await this.activityRepository.update(id, user, date, startTime, endTime, status);
   }
 
   async remove(id: number) {

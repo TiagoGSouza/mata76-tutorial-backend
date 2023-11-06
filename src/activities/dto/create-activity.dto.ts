@@ -1,7 +1,7 @@
 export class CreateActivityDto {
     user: string;
     date: string;
-    startTime: number;
-    endTime: number;
+    startTime: string;
+    endTime: string;
     status: string;
 }

@@ -32,11 +32,11 @@ export class PrismaActivityRepository implements ActivityRepository {
         return activities;
     }
 
-    async create(user: string, date: string, startTime: number, endTIme: number, status: string): Promise<void> {
-        if(startTime == 0){
+    async create(user: string, date: string, startTime: string, endTime: string, status: string): Promise<void> {
+        if(startTime === ''){
             status = "Não iniciada";
         }
-        else if (endTIme == 0){
+        else if (endTime === ''){
             status = "Iniciada";
         }
         else {
@@ -47,7 +47,7 @@ export class PrismaActivityRepository implements ActivityRepository {
                 user,
                 date,
                 startTime,
-                endTIme,
+                endTime,
                 status
             },
         });
@@ -61,11 +61,11 @@ export class PrismaActivityRepository implements ActivityRepository {
         });
     }
 
-    async update(id: number, user: string, date: string, startTime: number, endTIme: number, status: string): Promise<void> {
-        if(startTime == 0){
+    async update(id: number, user: string, date: string, startTime: string, endTime: string, status: string): Promise<void> {
+        if(startTime === ''){
             status = "Não iniciada";
         }
-        else if (endTIme == 0){
+        else if (endTime === ''){
             status = "Iniciada";
         }
         else {
@@ -79,7 +79,7 @@ export class PrismaActivityRepository implements ActivityRepository {
                 user,
                 date,
                 startTime,
-                endTIme,
+                endTime,
                 status
             },
         });
